@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f8fa;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 1.8rem;
+            margin: 15px 0;
+            line-height: 1.3;
+        }
+
+        form {
+            width: 100%;
+            background: #ffffff;
+            padding: 25px 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #444;
+            font-size: 1.2rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            background: #f8f9fa;
+        }
+
+        input.form-control:focus,
+        select.form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-hint {
+            display: block;
+            font-size: 1rem;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 24px;
+            padding-right: 40px;
+        }
+
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn:active {
+            background-color: #0062cc;
+        }
+
+        .btn:disabled {
+            background-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .loader {
+            display: none;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 24px;
+            height: 24px;
+            margin-left: 12px;
+            animation: spin 1s linear infinite;
+        }
+
+        #thankYou {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #28a745;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #007bff;
+            margin: 30px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Specific field styles */
+        #employeeId {
+            letter-spacing: 2px;
+        }
+
+        /* Media queries - desktop adjustments */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 700px;
+                padding: 20px;
+            }
+
+            form {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Employee Registration Form</h2>
+
+        <form id="empForm">
+            <div class="section-title">Personal Information</div>
+
+            <div class="form-group">
+                <label for="employeeId">Employee ID:</label>
+                <div class="input-group">
+                    <input type="tel" id="employeeId" name="employeeId" class="form-control" required pattern="\d{6}"
+                        maxlength="6" inputmode="numeric" autocomplete="off" />
+                    <span class="input-hint">Enter 6-digit employee ID</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" class="form-control" required autocomplete="name" />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" class="form-control" required inputmode="email"
+                    autocomplete="email" />
+            </div>
+
+            <div class="section-title">Contact Information</div>
+
+            <div class="form-group">
+                <label for="mobile">Primary Mobile:</label>
+                <div class="input-group">
+                    <input type="tel" id="mobile" name="mobile" class="form-control" required pattern="\d{10}"
+                        maxlength="10" inputmode="tel" autocomplete="tel" />
+                    <span class="input-hint">10-digit mobile number</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="altMobile">Alternate Mobile:</label>
+                <div class="input-group">
+                    <input type="tel" id="altMobile" name="altMobile" class="form-control" required pattern="\d{10}"
+                        maxlength="10" inputmode="tel" />
+                    <span class="input-hint">10-digit mobile number</span>
+                </div>
+            </div>
+
+            <div class="section-title">Employment Details</div>
+
+            <div class="form-group">
+                <label for="role">Job Title:</label>
+                <select id="role" name="role" class="form-control" required>
+                    <option value="" disabled selected>Please select a role</option>
+                    <option value="Manager">Manager</option>
+                    <option value="HR">HR</option>
+                    <option value="Team Leader">Team Leader</option>
+                    <option value="Field Executive">Field Executive</option>
+                    <option value="Telecaller">Tele-Caller</option>
+                    <option value="Backend Operators">Backend</option>
+                    <option value="IT Team">IT</option>
+                </select>
+            </div>
+
+            <div class="section-title">Address Information</div>
+
+            <div class="form-group">
+                <label for="address1">Present Address:</label>
+                <input type="text" id="address1" name="address1" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="address2">Permanent Address:</label>
+                <input type="text" id="address2" name="address2" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn">
+                <span id="submitText">Submit Registration</span>
+                <div class="loader" id="loader"></div>
+            </button>
+        </form>
+
+        <div id="thankYou">
+            <div style="font-size: 1.8rem;">✅ Thank you for submitting the form!</div>
+            <div style="margin-top: 20px; font-size: 1.2rem; color: #555;">Your information has been registered
+                successfully.</div>
+        </div>
+    </div>
+
+    <script>
+        // Wait for full page load before initializing
+        window.addEventListener('load', function () {
+            // Pre-cache location data when page loads
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        // Store position for later use
+                        window.cachedPosition = position;
+                        console.log("Pre-cached position with accuracy: " + position.coords.accuracy + " meters");
+                    },
+                    function (error) {
+                        console.log("Initial location caching failed: " + error.message);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 30000,
+                        maximumAge: 0
+                    }
+                );
+            }
+        });
+
+        document.getElementById('empForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const form = this;
+            const submitText = document.getElementById('submitText');
+            const loader = document.getElementById('loader');
+            const button = form.querySelector('button');
+
+            // Disable button during submission
+            button.disabled = true;
+            submitText.style.opacity = '0.7';
+            loader.style.display = 'inline-block';
+
+            if (!navigator.geolocation) {
+                alert("Geolocation not supported");
+                resetButton();
+                return;
+            }
+
+            // Use cached position if available and recent (less than 30 seconds old)
+            if (window.cachedPosition &&
+                (new Date().getTime() - window.cachedPosition.timestamp) < 30000) {
+                handlePositionSuccess(window.cachedPosition, form);
+                return;
+            }
+
+            // Use high accuracy positioning with increased timeout
+            navigator.geolocation.getCurrentPosition(
+                position => handlePositionSuccess(position, form),
+                error => handlePositionError(error),
+                {
+                    enableHighAccuracy: true,
+                    timeout: 30000,
+                    maximumAge: 0
+                }
+            );
+        });
+
+        function handlePositionSuccess(position, form) {
+            console.log("Position accuracy: " + position.coords.accuracy + " meters");
+
+            const formData = {
+                ...Object.fromEntries(new FormData(form).entries()),
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+                accuracy: position.coords.accuracy,
+                timestamp: new Date(position.timestamp).toISOString()
+            };
+
+            fetch("https://script.google.com/macros/s/AKfycbzWKFrXK9FczgNlXUpsg0CT2JYketOLh04d_D1aHRtjsVwub56P2bgiw9ezJlYMBSWC/exec", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        showSuccess();
+                    } else {
+                        throw new Error(data.message || "Unknown error");
+                    }
+                })
+                .catch(error => {
+                    alert("Submission failed: " + error.message);
+                    resetButton();
+                });
+        }
+
+        function handlePositionError(error) {
+            alert("Location access required for submission. Error: " + error.message);
+            resetButton();
+        }
+
+        function handleError(error) {
+            alert("Submission failed: " + error.message);
+            resetButton();
+        }
+
+        function showSuccess() {
+            document.getElementById('empForm').style.display = 'none';
+            document.getElementById('thankYou').style.display = 'block';
+        }
+
+        function resetButton() {
+            const button = document.querySelector('.btn');
+            const submitText = document.getElementById('submitText');
+            const loader = document.getElementById('loader');
+
+            button.disabled = false;
+            submitText.style.opacity = '1';
+            loader.style.display = 'none';
+        }
+
+        // Additional mobile-friendly enhancements
+        document.querySelectorAll('input, select').forEach(el => {
+            // Focus and blur effects for better visual feedback
+            el.addEventListener('focus', function () {
+                this.parentElement.classList.add('focused');
+            });
+
+            el.addEventListener('blur', function () {
+                this.parentElement.classList.remove('focused');
+            });
+        });
+    </script>
+</body>
+
+</html>
